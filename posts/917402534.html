@@ -1,0 +1,746 @@
+<!DOCTYPE HTML><html lang="zh-CN"><head><meta charset="utf-8"><meta name="keywords" content="作为前端人，谁没有自己的脚手架, JavaScript react vue webpack parcel JQuery"><meta name="baidu-site-verification" content="code-XlgmDTFPBw"><meta name="google-site-verification" content="RTFx0NaB3janGA0jdKrnhcOQ_1ldQlWY6nR5qwb-EFE"><meta name="description" content="博主喜欢没事的时候，捣鼓一些小项目，博主还喜欢使用typescript，但每次要新搞一个项目时，都要配置一堆文件，例如eslint,tsconfig等文件。甚是麻烦。再说，前端人怎么可以没有自己的脚手架呢。
+项目期望
+通过命令 ts-cli"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="renderer" content="webkit|ie-stand|ie-comp"><meta name="mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>作为前端人，谁没有自己的脚手架 | tonghui</title><link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/libs/awesome/css/all.css"><link rel="stylesheet" href="/libs/materialize/materialize.min.css"><link rel="stylesheet" href="/libs/aos/aos.css"><link rel="stylesheet" href="/libs/animate/animate.min.css"><link rel="stylesheet" href="/libs/lightGallery/css/lightgallery.min.css"><link rel="stylesheet" href="/css/matery.css"><link rel="stylesheet" href="/css/my.css"><style>code[class*=language-],pre[class*=language-]{white-space:pre!important}</style><script src="/libs/jquery/jquery.min.js"></script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tonghui" type="application/atom+xml"><link rel="stylesheet" href="/css/prism-tomorrow.css"><link rel="stylesheet" href="/css/prism-line-numbers.css"><link rel="stylesheet" href="/css/prism-tomorrow.css"><link rel="stylesheet" href="/css/prism-line-numbers.css"></head><body><header class="navbar-fixed"><nav id="headNav" class="bg-color nav-transparent"><div id="navContainer" class="nav-wrapper container"><div class="brand-logo"><a href="/" class="waves-effect waves-light"><img src="/logo.png" class="logo-img" alt="LOGO"></a></div><a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a><ul class="right nav-menu"><li class="hide-on-med-and-down nav-item"><a href="/" class="waves-effect waves-light"><i class="fas fa-home" style="zoom:.6"></i> <span>首页</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/tags" class="waves-effect waves-light"><i class="fas fa-tags" style="zoom:.6"></i> <span>标签</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/categories" class="waves-effect waves-light"><i class="fas fa-bookmark" style="zoom:.6"></i> <span>分类</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/archives" class="waves-effect waves-light"><i class="fas fa-archive" style="zoom:.6"></i> <span>归档</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/about" class="waves-effect waves-light"><i class="fas fa-user-circle" style="zoom:.6"></i> <span>关于</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/contact" class="waves-effect waves-light"><i class="fas fa-comments" style="zoom:.6"></i> <span>留言</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/friends" class="waves-effect waves-light"><i class="fas fa-address-book" style="zoom:.6"></i> <span>友链</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/navigate" class="waves-effect waves-light"><i class="fas fa-location-arrow" style="zoom:.6"></i> <span>导航</span></a></li><li><a href="#searchModal" class="modal-trigger waves-effect waves-light"><i id="searchIcon" class="fas fa-search" title="搜索" style="zoom:.85"></i></a></li></ul><div id="mobile-nav" class="side-nav sidenav"><div class="mobile-head bg-color"><img src="/logo.png" class="logo-img circle responsive-img"><div class="logo-name">tonghui</div><div class="logo-desc">JavaScript工程师</div></div><ul class="menu-list mobile-menu-list"><li class="m-nav-item"><a href="/" class="waves-effect waves-light"><i class="fa-fw fas fa-home"></i> 首页</a></li><li class="m-nav-item"><a href="/tags" class="waves-effect waves-light"><i class="fa-fw fas fa-tags"></i> 标签</a></li><li class="m-nav-item"><a href="/categories" class="waves-effect waves-light"><i class="fa-fw fas fa-bookmark"></i> 分类</a></li><li class="m-nav-item"><a href="/archives" class="waves-effect waves-light"><i class="fa-fw fas fa-archive"></i> 归档</a></li><li class="m-nav-item"><a href="/about" class="waves-effect waves-light"><i class="fa-fw fas fa-user-circle"></i> 关于</a></li><li class="m-nav-item"><a href="/contact" class="waves-effect waves-light"><i class="fa-fw fas fa-comments"></i> 留言</a></li><li class="m-nav-item"><a href="/friends" class="waves-effect waves-light"><i class="fa-fw fas fa-address-book"></i> 友链</a></li><li class="m-nav-item"><a href="/navigate" class="waves-effect waves-light"><i class="fa-fw fas fa-location-arrow"></i> 导航</a></li><li><div class="divider"></div></li><li><a href="https://github.com/tonghuitop" class="waves-effect waves-light" target="_blank"><i class="fab fa-github-square fa-fw"></i>Fork Me</a></li></ul></div></div><style>.nav-transparent .github-corner{display:none!important}.github-corner{position:absolute;z-index:10;top:0;right:0;border:0;transform:scale(1.1)}.github-corner svg{color:#0f9d58;fill:#fff;height:64px;width:64px}.github-corner:hover .octo-arm{animation:a .56s ease-in-out}.github-corner .octo-arm{animation:none}@keyframes a{0%,to{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}</style><a href="https://github.com/tonghuitop" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50"><svg viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a></nav></header><div class="bg-cover pd-header post-cover" style="background-image:url(/img/blog/cli.jpg)"><div class="container" style="right:0;left:0"><div class="row"><div class="col s12 m12 l12"><div class="brand"><div class="description center-align post-title">作为前端人，谁没有自己的脚手架</div></div></div></div></div></div><main class="post-container content"><link rel="stylesheet" href="/libs/tocbot/tocbot.css"><style>#articleContent h1::before,#articleContent h2::before,#articleContent h3::before,#articleContent h4::before,#articleContent h5::before,#articleContent h6::before{display:block;content:" ";height:100px;margin-top:-100px;visibility:hidden}#articleContent :focus{outline:0}.toc-fixed{position:fixed;top:64px}.toc-widget{width:345px;padding-left:20px}.toc-widget .toc-title{margin:35px 0 15px 0;padding-left:17px;font-size:1.5rem;font-weight:700;line-height:1.5rem}.toc-widget ol{padding:0;list-style:none}#toc-content{height:calc(100vh - 250px);overflow:auto}#toc-content ol{padding-left:10px}#toc-content ol li{padding-left:10px}#toc-content .toc-link:hover{color:#42b983;font-weight:700;text-decoration:underline}#toc-content .toc-link::before{background-color:transparent;max-height:25px}#toc-content .is-active-link{color:#42b983}#toc-content .is-active-link::before{background-color:#42b983}#floating-toc-btn{position:fixed;right:15px;bottom:76px;padding-top:15px;margin-bottom:0;z-index:998}#floating-toc-btn .btn-floating{width:48px;height:48px}#floating-toc-btn .btn-floating i{line-height:48px;font-size:1.4rem}</style><div class="row"><div id="main-content" class="col s12 m12 l9"><div id="artDetail"><div class="card"><div class="card-content article-info"><div class="row tag-cate"><div class="col s7"><div class="article-tag"><a href="/tags/JavaScript/"><span class="chip bg-color">JavaScript</span></a> <a href="/tags/TypeScript/"><span class="chip bg-color">TypeScript</span></a> <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/"><span class="chip bg-color">脚手架</span></a> <a href="/tags/cli/"><span class="chip bg-color">cli</span></a></div></div><div class="col s5 right-align"><div class="post-cate"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/JavaScript/" class="post-category">JavaScript</a> <a href="/categories/JavaScript/TypeScript/" class="post-category">TypeScript</a> <a href="/categories/JavaScript/TypeScript/cli/" class="post-category">cli</a></div></div></div><div class="post-info"><div class="post-date info-break-policy"><i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2021-07-23</div><div class="post-date info-break-policy"><i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp; 2022-01-23</div><div class="info-break-policy"><i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 4.2k</div><div class="info-break-policy"><i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp; 19 分</div><div id="busuanzi_container_page_pv" class="info-break-policy"><i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span></div></div></div><hr class="clearfix"><div class="card-content article-card-content"><div id="articleContent"><p>博主喜欢没事的时候，捣鼓一些小项目，博主还喜欢使用typescript，但每次要新搞一个项目时，都要配置一堆文件，例如<code>eslint</code>,<code>tsconfig</code>等文件。甚是麻烦。再说，前端人怎么可以没有自己的脚手架呢。</p><h3 id="项目期望"><a href="#项目期望" class="headerlink" title="项目期望"></a>项目期望</h3><ol><li>通过命令 ts-cli create<app name="">生成一个ts项目</app></li><li>根据选项，选择是否安装 <code>eslint</code>, <code>prettier</code>, <code>cz-conventional-changelog</code></li><li>自动配置好<code>typescript</code>, <code>eslint</code>, <code>prettier</code>, <code>cz</code>对应配置。</li></ol><h3 id="先手动手初始化配置一个tonghui-cli-项目"><a href="#先手动手初始化配置一个tonghui-cli-项目" class="headerlink" title="先手动手初始化配置一个tonghui-cli 项目"></a>先手动手初始化配置一个tonghui-cli 项目</h3><ol><li>初始化项目目录 并初始化git仓库<pre><code>mkdir tonghui-cli &amp;&amp; cd tonghui-cli
+npm init -y // 初始化package.json
+git init</code></pre>新增<code>.gitignore</code>文件, 设置忽略的文件<pre><code>node_modules/</code></pre></li></ol><ol start="2"><li>安装typescript, 并在根目录中添加tsconfig.json文件，并进行如下配置<pre><code>npm i typescript -D
+npm i @types/node -D // 安装 node.js 的类型定义包
+npm i ts-node-dev -D // 开发实时编译
+// tsconfig.json
+{
+"compileOnSave": true,
+"compilerOptions": {
+ "target": "es2020",
+ "module": "commonjs",
+ "moduleResolution": "node",
+ "experimentalDecorators": true,
+ "emitDecoratorMetadata": true,
+ "inlineSourceMap": true,
+ "noImplicitThis": true,
+ "noUnusedLocals": true,
+ "stripInternal": true,
+ "pretty": true,
+ "declaration": true,
+ "outDir": "lib",
+ "baseUrl": "./",
+ "paths": {
+   "*": ["src/*"]
+ }
+},
+"exclude": ["lib", "node_modules", "test"]
+}</code></pre></li></ol><p><strong>修改package.json文件，添加ts自带编译脚本命令</strong></p><pre><code>"script": {
+  "build:comment": "构建",
+  "build": "npm run eslint &amp;&amp; npm run prettier &amp;&amp; rm -rf lib &amp;&amp; tsc --build",
+}</code></pre><p>更新<code>.gitignore</code>文件，新增忽略文件<code>lib</code></p><pre><code>node_modules/
+lib/</code></pre><ol start="3"><li>安装<code>eslint</code>，并配置<code>.eslintrc.json</code><blockquote><p>因为 TypeScript 关注的重心是类型的检查，而不是代码风格。所以我们通过<code>eslint</code>来进行语法的检查</p></blockquote><pre><code>npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+// eslint: ESLint的核心代码
+// @typescript-eslint/parser：ESLint的解析器，用于解析typescript，从而检查和规范Typescript代码
+// @typescript-eslint/eslint-plugin：这是一个ESLint插件，包含了各类定义好的检测Typescript代码的规范</code></pre>在项目根目录中新建<code>.eslintrc.json</code>文件，配置eslint<pre><code>{
+"env": {
+ "browser": true,
+ "es2021": true,
+ "node": true
+},
+"extends": [
+ "eslint:recommended", // 推荐的规则
+ "plugin:@typescript-eslint/recommended", // ts推荐的规则
+],
+"parser": "@typescript-eslint/parser",  // 解释器
+"parserOptions": {
+ "ecmaVersion": 12,
+ "sourceType": "module"
+},
+"plugins": [
+ "@typescript-eslint",
+],
+}</code></pre></li></ol><p><strong>修改package.json文件，添加类型检查脚本命令</strong></p><pre><code>"script": {
+  "eslint": "eslint --fix src --ext .ts --max-warnings=0",
+  "prettier:comment": "自动格式化 src 目录下的所有 .ts 文件",
+}</code></pre><ol start="4"><li>安装<code>prettier</code>, 并配置<code>.prettierrc.json</code><blockquote><p>Prettier中文的意思是漂亮的、美丽的。eslint可以检查出不规范的代码，prettier可以自动格式化为规范的代码</p></blockquote><pre><code>npm i -D prettier eslint-config-prettier eslint-plugin-prettier</code></pre>在项目根目录中新建<code>.prettierrc.json</code><pre><code>{
+"printWidth": 80,                   // 每一行的代码不能超过80
+"tabWidth": 2,                      // tab的宽度
+"useTabs": true,                    // 使用tab
+"singleQuote": true,                // 使用单引号代替双引
+"quoteProps": "as-needed",          // 当没有严格要求时，禁止对象字面量属性名称使用引号
+"semi": false,                      // 末尾分号
+"trailingComma": "none",            // 单行数组永远不会有尾随逗号
+"bracketSpacing": true,             // 大括号中间的空格
+"jsxBracketSameLine": true,         // 将&gt;多行 JSX 元素的 放在最后一行的末尾，而不是单独放在下一行
+"jsxSingleQuote": false,            // 在 JSX 中使用单引号代替双引号
+"arrowParens": "always",            // 在唯一的箭头函数参数周围包含括号
+"requirePragma": false,             // Prettier 可以将自身限制为仅在文件顶部包含称为 pragma 的特殊注释的格式文件。这在逐渐将大型无格式代码库过渡到 Prettier 时非常有用
+"insertPragma": false,              // Prettier 可以@format在文件顶部插入一个特殊标记，指定文件已使用 Prettier 格式化
+"proseWrap": "preserve",            // 默认情况下，Prettier 将按原样包装 Markdown 文本，因为某些服务使用对换行敏感的渲染器，例如 GitHub 评论和 BitBucket。
+"htmlWhitespaceSensitivity": "css", // 为 HTML、Vue、Angular 和 Handlebars 指定全局空白敏感度。
+"endOfLine": "lf"                 // 由于历史原因，文本文件中存在两种常见的行尾形式。即\n（或LF换行）和\r\n（或回车+CRLF换行）。
+}</code></pre></li></ol><p><strong>修改package.json文件，添加自动格式化代码命令</strong></p><pre><code>"script": {
+  "prettier:comment": "自动格式化 src 目录下的所有 .ts 文件",
+  "prettier": "prettier --write \"src/**/*.ts\"",
+}</code></pre><ol start="5"><li>安装<code>commitlint</code>,<blockquote><p>在系统开发中，如果 git 提交说明精准，在后期的协作以及 bug 处理时会变的有据可查，变相的提高了系统的可维护性，而且可以根据规范的提交说明快速生成开发日志，从而方便开发者或用户追踪项目的开发信息和功能特性。commitizen 是一个实现规范提交说明的工具。</p></blockquote></li></ol><p><strong>使用 commitizen 在项目中生成符合 AngularJS 规范的提交说明，并初始化 cz-conventional-changelog 适配器</strong></p><pre><code>npx commitizen init cz-conventional-changelog --save --save-exact</code></pre><p>上面的命令为你做了三件事：</p><ol><li>安装 cz-conventional-changelog 适配器 npm 模块</li><li>将其保存到 package.json 的依赖项或 devDependencies</li><li>将config.commitizen密钥添加到package.json的根目录中，如下所示：<pre><code>"devDependencies": {
+"cz-conventional-changelog": "^3.3.0"
+},
+"config": {
+"commitizen": {
+ "path": "cz-conventional-changelog"
+}
+}</code></pre><strong>接下来安装校验工具，负责校验提交信息是否符合规范</strong><pre><code>npm i @commitlint/cli @commitlint/config-conventional -D</code></pre><strong>在项目根目录下新建 commitlint.config.js 并设置校验规则</strong><pre><code>module.exports = {
+extends: ['@commitlint/config-conventional']
+}</code></pre><strong>修改package.json文件，添加使用规范化的提交信息脚本命令</strong><pre><code>"script": {
+"commit:comment": "引导设置规范化的提交信息",
+"commit": "cz"
+}</code></pre></li></ol><ol start="6"><li>安装<code>husky</code>和<code>lint-staged</code><blockquote><p>husky: husky 是一个 Git Hook 工具<br>lint-staged: lint-staged 是一个在git暂存文件上运行linters的工具。<br>两者结合我们可以在git commit之前对git暂存文件进行lint检查和代码格式，而不需要对所有项目文件进行改动</p></blockquote><pre><code>npm i husky lint-staged -D</code></pre></li></ol><p><strong>修改package.json文件，添加lint-staged配置</strong></p><pre><code>"script": {
+  "commit:comment": "引导设置规范化的提交信息",
+  "commit": "cz"
+},
+"lint-staged": {
+  "*.ts": [
+    "npm run eslint",
+    "npm run prettier"
+  ]
+},</code></pre><p><strong>git hooks的设置</strong></p><pre><code>npx husky install // 生成一个 .husky 的文件夹
+npx husky add .husky/pre-commit "npx npx lint-staged"</code></pre><p>至此一个TS项目的初始化配置已经完成。包含已下功能过</p><ul><li>安装完成<code>typescript</code>，并设置好tsconfig.json文件</li><li>安装<code>eslint</code>, <code>prettier</code>, <code>cz</code>, <code>husky</code>等功能，并设置配置。</li></ul><h3 id="ts-cli-脚手架"><a href="#ts-cli-脚手架" class="headerlink" title="ts-cli 脚手架"></a>ts-cli 脚手架</h3><blockquote><p>目前整个项目的搭建是我们手动搭建，下面正餐开始，开发脚手架，通过自动化的方式<code>ts-cli create ts-app</code>创建出我们配置半天的项目。</p></blockquote><h4 id="开发脚手架常用的第三方包"><a href="#开发脚手架常用的第三方包" class="headerlink" title="开发脚手架常用的第三方包"></a>开发脚手架常用的第三方包</h4><ul><li><p>commander</p><blockquote><p>完整的 node.js 命令行解决方案，灵感来自 Ruby 的 commander</p></blockquote></li><li><p>chalk</p><blockquote><p>粉饰你的终端，给你的终端文字添加样式</p></blockquote></li><li><p>shelljs</p><blockquote><p>让你在 node.js 中使用 unix shell 命令</p></blockquote></li><li><p>clear-console</p><blockquote><p>清空命令行</p></blockquote></li></ul><h4 id="本地npm包的调试。"><a href="#本地npm包的调试。" class="headerlink" title="本地npm包的调试。"></a>本地npm包的调试。</h4><ol><li>npm link的调试<blockquote><p>在本地开发npm模块的时候，我们可以使用npm link命令，将npm 模块链接到对应的运行项目中去，方便地对模块进行调试和测试</p></blockquote></li><li><code>package.json</code>中的<code>bin</code>字段<blockquote><p>bin项用来指定各个内部命令对应的可执行文件的位置</p></blockquote><pre><code>// package.json
+...
+"bin": {
+"ts-cli": "./bin/cli.js"
+},
+...</code></pre><blockquote><p>上面代码指定，ts-cli 命令对应的可执行文件为 bin 子目录下的 cli.js。Npm会寻找这个文件，在node_modules/.bin/目录下建立符号链接。在上面的例子中，cli.js会建立符号链接node_modules/.bin/ts-cli。所以执行ts-cli运行的是<code>./bin/cli.js</code>文件</p></blockquote></li></ol><h4 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h4><pre><code>// 自制脚手架目录
+├── bin
+│   └── cli.js  // 全局命令执行的根文件
+├── src
+│   ├── order
+│   │    └── cerate.ts 用户交互主程
+│   ├── utils   // 存放工具方法
+│   │    |___common.ts  // 存放基础的公共方法
+│   │    |___create.ts  // 用户交互命令的方法
+│   │    └── installFeature.ts // 安装单个feature的具体方法文件
+│   └── index.ts // 脚手架主命令流程 
+├── .huskyrc    // git hook文件夹
+├── .eslintrc.json // eslint代码规范校
+├── .gitignore.json
+├── .prettierrc.json
+├── .commitlint.config.js
+├── tsconfig.json // ts配置文件
+├── package.json
+|__ README.md</code></pre><h5 id="src-utils-common-ts-基础的公共方法"><a href="#src-utils-common-ts-基础的公共方法" class="headerlink" title="src/utils/common.ts 基础的公共方法"></a>src/utils/common.ts 基础的公共方法</h5><pre><code>import { readFileSync, writeFileSync } from 'fs'
+import { resolve } from 'path'
+import * as clear from 'clear-console'
+
+export interface PackageJSON {
+  name: string
+  version: string
+  description: string
+  scripts: {
+    [key: string]: string
+  }
+  [key: string]: unknown
+}
+
+export interface JSON {
+  [key: string]: unknown
+}
+
+/**
+ * 读取指定文件下 json 文件
+ * @param filename json 文件的路径
+ */
+export function readJsonFile&lt;T&gt;(filename: string): T {
+  return JSON.parse(readFileSync(filename, { encoding: 'utf-8', flag: 'r' }))
+}
+
+/**
+ * 覆写指定路径下的 json 文件
+ * @param filename json 文件的路径
+ * @param content json 内容
+ */
+export function writeJsonFile&lt;T&gt;(filename: string, content: T): void {
+  writeFileSync(filename, JSON.stringify(content, null, 2), {
+    encoding: 'utf-8'
+  })
+}
+
+/**
+ * 获取项目的绝对路径
+ * @param projectName 项目名称
+ */
+export function getProjectPath(projectName: string): string {
+  return resolve(process.cwd(), projectName)
+}
+
+/**
+ * 打印信息
+ */
+export function printMsg(msg: string): void {
+  console.log(msg)
+}
+
+/**
+ * 清空命令行
+ */
+export function clearConsole(): void {
+  clear()
+}</code></pre><h5 id="src-utils-installFeature-ts-安装eslint等第三方包，后期可扩展"><a href="#src-utils-installFeature-ts-安装eslint等第三方包，后期可扩展" class="headerlink" title="src/utils/installFeature.ts 安装eslint等第三方包，后期可扩展"></a>src/utils/installFeature.ts 安装<code>eslint</code>等第三方包，后期可扩展</h5><pre><code>/**
+ * 安装包的方法
+ */
+import * as shell from 'shelljs'
+import { writeFileSync } from 'fs'
+import { red } from 'chalk'
+
+import { PackageJSON, printMsg, readJsonFile, writeJsonFile } from './common'
+
+/**
+ * 安装ESLint
+ */
+function installESLint(): void {
+  shell.exec(
+    'npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-prettier -D'
+  )
+  // 添加 eslintrc.json
+  const eslintrc = `{
+    "env": {
+      "es2021": true,
+      "node": true,
+      "browser": true,
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint"
+      "prettier" //  eslint 会使用pretter的规则对代码格式化
+    ],
+    "rules": {
+      "prettier/prettier": 2, // 对于不符合prettier规范的写法，eslint会提示报错
+      "spaced-comment": [2, "always"] // 注释后面必须写两个空格
+    }
+  }`
+  try {
+    writeFileSync('./.eslintrc.json', eslintrc, { encoding: 'utf-8' })
+  } catch (err) {
+    printMsg(`${red('Failed to write .eslintrc.json file content')}`)
+    printMsg(`${red('Please add the following content in .eslintrc.json')}`)
+    printMsg(`${red(eslintrc)}`)
+  }
+
+  // 修改package.json
+  const packageJson = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJson.scripts['eslint:comment'] =
+    '使用 ESLint 检查并自动修复 src 目录下所有扩展名为 .ts 的文件'
+  packageJson.scripts['eslint'] = 'eslint --fix src --ext .ts --max-warnings=0'
+  writeJsonFile&lt;PackageJSON&gt;('./package.json', packageJson)
+}
+
+/**
+ * 安装 Prettier
+ */
+function installPrettier(): void {
+  // 安装 prettier 和 prettier与ESlint的插件
+  shell.exec('npm i prettier -D')
+  // 添加 prettier.json
+  const prettierrc = `{
+    // 一行最多 80 字符
+    "printWidth": 80,
+    // 使用 2 个空格缩进
+    "tabWidth": 2,
+    // 不使用 tab 缩进，而使用空格
+    "useTabs": false,
+    // 行尾需要有分号
+    "semi": false,
+    // 使用单引号代替双引号
+    "singleQuote": true,
+    // 对象的 key 仅在必要时用引号
+    "quoteProps": "as-needed",
+    // jsx 不使用单引号，而使用双引号
+    "jsxSingleQuote": false,
+    // 末尾不实用逗号
+    "trailingComma": "none",
+    // 大括号内的首尾需要空格 { foo: bar }
+    "bracketSpacing": true,
+    // jsx 标签的反尖括号需要换行
+    "jsxBracketSameLine": true,
+    // 箭头函数，只有一个参数的时候，也需要括号
+    "arrowParens": "always",
+    // 不需要写文件开头的 @prettier
+    "requirePragma": false,
+    // 不需要自动在文件开头插入 @prettier
+    "insertPragma": false,
+    // 使用默认的折行标准
+    proseWrap: 'preserve',
+    // 根据显示样式决定 html 要不要折行
+    htmlWhitespaceSensitivity: 'css',
+    // 换行符使用 lf
+    endOfLine: 'lf'
+  }`
+  try {
+    writeFileSync('./.prettierrc.json', prettierrc, { encoding: 'utf-8' })
+  } catch (err) {
+    printMsg(`${red('Failed to write .prettierrc.json file content')}`)
+    printMsg(`${red('Please add the following content in .prettierrc.json')}`)
+    printMsg(`${red(prettierrc)}`)
+  }
+
+  // 修改package.json
+  const packageJson = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJson.scripts['prettier:comment'] =
+    '自动格式化 src 目录下的所有 .ts 文件'
+  packageJson.scripts['prettier'] = 'prettier --write "src/**/*.ts"'
+  writeJsonFile&lt;PackageJSON&gt;('./package.json', packageJson)
+}
+
+/**
+ * 安装 CZ，规范 git 提交信息
+ */
+function installCZ(): void {
+  shell.exec(
+    'npx commitizen init cz-conventional-changelog --save --save-exact'
+  )
+  shell.exec('npm i @commitlint/cli @commitlint/config-conventional -D')
+  // 添加 commitlint.config.js
+  const commitlint = `module.exports = {
+    extends: ['@commitlint/config-conventional']
+  }`
+  try {
+    writeFileSync('./commitlint.config.js', commitlint, { encoding: 'utf-8' })
+  } catch (err) {
+    printMsg(`${red('Failed to write .commitlint.config.js file content')}`)
+    printMsg(
+      `${red('Please add the following content in .commitlint.config.js')}`
+    )
+    printMsg(`${red(commitlint)}`)
+  }
+
+  // 改写 package.json
+  const packageJson = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJson.scripts['commit:comment'] = '引导设置规范化的提交信息'
+  packageJson.scripts['commit'] = 'cz'
+  writeJsonFile&lt;PackageJSON&gt;('./package.json', packageJson)
+}
+
+/**
+ * 安装 husky 和 lint-staged，以实现 git commit 时自动化校验
+ * @param hooks，需要自动执行的钩子
+ * @param lintStaged，需要钩子运行的命令
+ */
+function installHusky(
+  hooks: { [key: string]: string },
+  lintStaged: Array&lt;string&gt;
+): void {
+  // 初始化 git 仓库
+  shell.exec('git init')
+  // 在安装 husky 和 lint-staged
+  shell.exec('npm i husky lint-staged -D')
+  // 设置 package.json
+  const packageJson = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJson['lint-staged'] = {
+    '*.ts': lintStaged.map((item) =&gt; `npm run ${item}`)
+  }
+  writeJsonFile&lt;PackageJSON&gt;('./package.json', packageJson)
+  shell.exec(
+    'npx husky install &amp;&amp; npx husky add .husky/pre-commit "npx lint-staged"'
+  )
+}
+
+/**
+ * 安装构建工具，目前主要用于小项目，所以使用 typescript 原生的构建功能即可
+ * @param feature 已安装的包
+ */
+function installBuild(feature: Array&lt;string&gt;): void {
+  // 设置 package.json
+  const packageJson = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJson.scripts['build:comment'] = '构建'
+  let order = ''
+  if (feature.includes('ESLint')) {
+    order += 'npm run eslint'
+  }
+  if (feature.includes('Prettier')) {
+    order += ' &amp;&amp; npm run prettier'
+  }
+  order += ' &amp;&amp; rm -rf lib &amp;&amp; tsc --build'
+  packageJson.scripts['build'] = order
+  writeJsonFile&lt;PackageJSON&gt;('./package.json', packageJson)
+}
+
+export default {
+  installESLint,
+  installPrettier,
+  installCZ,
+  installHusky,
+  installBuild
+}</code></pre><h5 id="src-utils-create-ts"><a href="#src-utils-create-ts" class="headerlink" title="src/utils/create.ts"></a>src/utils/create.ts</h5><pre><code>/**
+ * create 命令需要用到的所有方法
+ */
+import {
+  JSON,
+  printMsg,
+  PackageJSON,
+  clearConsole,
+  readJsonFile,
+  writeJsonFile,
+  getProjectPath
+} from './common'
+import { existsSync } from 'fs'
+import { prompt } from 'inquirer'
+import { blue, cyan, gray, red, yellow } from 'chalk'
+import * as shell from 'shelljs'
+import installFeatureMethod from './installFeature'
+
+/**
+ * 验证当前目录下是否已经存在指定文件，如果存在则退出进行
+ * @param filename 文件名
+ */
+export function isFileExist(filename: string): void {
+  // 文件路径
+  const file = getProjectPath(filename)
+  if (existsSync(file)) {
+    printMsg(red(`${file} 文件已存在`))
+    process.exit(1)
+  }
+}
+
+/**
+ * 交互式命令行，让用户自己选择需要的功能
+ */
+export async function selectFeature(): Promise&lt;Array&lt;string&gt;&gt; {
+  // 清空命令行
+  clearConsole()
+  // 输出信息
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  printMsg(blue(`TS CLI v${require('../../package.json').version}`))
+  printMsg('Start initializing the project:')
+  printMsg('')
+  // 选择功能，这里配合 下面的 installFeature 方法 和 ./installFeature.ts 文件为脚手架提供了良好的扩展机制
+  // 将来扩展其它功能只需要在 choices 数组中增加配置项，然后在 ./installFeature.ts 文件中增加相应的安装方法即可
+  const { feature } = await prompt([
+    {
+      name: 'feature',
+      type: 'checkbox',
+      message: 'Check the features needed for your project',
+      choices: [
+        { name: 'ESLint', value: 'ESLint' },
+        { name: 'Prettier', value: 'Prettier' },
+        { name: 'CZ', value: 'CZ' }
+      ]
+    }
+  ])
+  return feature as Array&lt;string&gt;
+}
+
+/**
+ * 初始化项目目录
+ */
+export function initProjectDir(projectName: string): void {
+  shell.exec(`mkdir ${projectName}`)
+  shell.cd(projectName)
+  shell.exec('npm init -y')
+}
+
+/**
+ * 改写项目中 package.json 的 name
+ */
+export function changePackageInfo(projectName: string): void {
+  const packageJSON: PackageJSON = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJSON.name = packageJSON.description = projectName
+  writeJsonFile('./package.json', packageJSON)
+}
+
+/**
+ * 安装 typescript 并初始化
+ */
+export function installTSAndInit(): void {
+  shell.exec('npm i typescript -D &amp;&amp; npx tsc --init')
+  const tsconfigJson: JSON = {
+    compileOnSave: true,
+    compilerOptions: {
+      target: 'ES2018',
+      module: 'ESNext',
+      moduleResolution: 'node',
+      experimentalDecorators: true,
+      emitDecoratorMetadata: true,
+      inlineSourceMap: true,
+      noImplicitThis: true,
+      noUnusedLocals: true,
+      stripInternal: true,
+      pretty: true,
+      declaration: true,
+      outDir: 'lib',
+      baseUrl: './',
+      strict: true,
+      forceConsistentCasingInFileNames: true
+    },
+    exclude: ['lib', 'node_modules']
+  }
+  try {
+    writeJsonFile('./tsconfig.json', tsconfigJson)
+  } catch (err) {
+    printMsg(red('Failed to write tsconfig.json file content'))
+    printMsg(red('Please add the following content in tsconfig.json'))
+    printMsg(red(tsconfigJson))
+    shell.exec('mkdir src &amp;&amp; touch src/index.ts')
+  }
+}
+
+/**
+ * 安装 @types/node
+ * 这是 node.js 的类型定义包
+ */
+export function installTypesNode(): void {
+  shell.exec('npm i @types/node -D')
+}
+
+/**
+ * 安装开发环境，支持实时编译
+ */
+export function installDevEnvironment(): void {
+  shell.exec('npm i ts-node-dev -D')
+  // 修改package.json 文件
+  const packageJson = readJsonFile&lt;PackageJSON&gt;('./package.json')
+  packageJson.scripts['dev:comment'] = '启动开发编译'
+  packageJson.scripts['dev'] = 'ts-node-dev --respawn --transpile-only index.ts'
+  writeJsonFile('./package.json', packageJson)
+}
+
+/**
+ * 安装用户选择的功能
+ * @param feature 户选择的功能列表
+ */
+export function installFeature(feature: Array&lt;string&gt;): void {
+  feature.forEach((item) =&gt; {
+    const featureFuncName =
+      `install${item}` as keyof typeof installFeatureMethod
+    const func = installFeatureMethod[featureFuncName] as () =&gt; void
+    func()
+  })
+  // 安装 husky 和 lint-staged
+  installHusky(feature)
+  // 安装构建工具
+  installFeatureMethod.installBuild(feature)
+}
+
+/**
+ * 安装 husky 和 lint-staged，并根据功能设置相关命令
+ * @param feature 户选择的功能列表
+ */
+function installHusky(feature: Array&lt;string&gt;): void {
+  // 副本
+  const featureBak = Object.assign([], feature)
+  // 设置hook
+  const hooks: { [key: string]: string } = {}
+  // 判断用户是否选择了CZ，有则这是hooks
+  if (featureBak.includes('CZ')) {
+    hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS'
+  }
+  // 设置lintStaged
+  const lintStaged: Array&lt;string&gt; = []
+  if (featureBak.includes('ESLint')) {
+    lintStaged.push('eslint')
+  }
+  if (featureBak.includes('Prettier')) {
+    lintStaged.push('prettier')
+  }
+  installFeatureMethod.installHusky(hooks, lintStaged)
+}
+
+/**
+ * 整个项目安装结束，给用户提示信息
+ */
+export function end(projectName: string): void {
+  printMsg(`Successfully create project ${yellow(projectName)}`)
+  printMsg('Get started with the following commands')
+  printMsg('')
+  printMsg(`${gray('$')} ${cyan('cd ' + projectName)}`)
+  printMsg(`${gray('$')} ${cyan('npm run dev')}`)
+  printMsg('')
+}</code></pre><h5 id="src-order-create-ts"><a href="#src-order-create-ts" class="headerlink" title="src/order/create.ts"></a>src/order/create.ts</h5><pre><code>/**
+ * create 命令行的具体任务
+ */
+import {
+  isFileExist,
+  selectFeature,
+  initProjectDir,
+  changePackageInfo,
+  installTSAndInit,
+  installTypesNode,
+  installDevEnvironment,
+  installFeature,
+  end
+} from '../utils/create'
+export default async function create(projectName: string): Promise&lt;void&gt; {
+  // 判断文件是否存在
+  isFileExist(projectName)
+  // 选择需要的功能
+  const feature = await selectFeature()
+  // 初始化项目目录
+  initProjectDir(projectName)
+  // 改写项目的 package.json 基本信息，比如 name
+  changePackageInfo(projectName)
+  // 安装 typescript 并初始化
+  installTSAndInit()
+  // 安装 @types/node
+  installTypesNode()
+  // 安装开发环境，支持实时编译
+  installDevEnvironment()
+  // 安装 feature
+  installFeature(feature)
+  // 结束
+  end(projectName)
+}</code></pre><h5 id="src-index-ts"><a href="#src-index-ts" class="headerlink" title="src/index.ts"></a>src/index.ts</h5><pre><code>import { program } from 'commander'
+import create from './order/create'
+
+program
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  .version(`${require('../package.json').version}`, '-v --version')
+  .usage('&lt;command&gt; [options]')
+
+program
+  .command('create &lt;app-name&gt;')
+  .description('Create new project from =&gt; ts-cli create yourProjectName')
+  .action(async (name: string) =&gt; {
+    await create(name)
+  })
+
+program.parse(process.argv)</code></pre><h5 id="bin-cli-js"><a href="#bin-cli-js" class="headerlink" title="bin/cli.js"></a>bin/cli.js</h5><pre><code>#!/usr/bin/env node
+require('../lib/index')</code></pre><h3 id="构建与测试"><a href="#构建与测试" class="headerlink" title="构建与测试"></a>构建与测试</h3><pre><code>❯ yarn build
+❯ npm link
+❯ ../ts-cli create test-ts-app</code></pre><h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><ol><li>整理<code>package.json</code>信息<pre><code>{
+"name": "@tonghui/ts-cli",
+"main": "./lib/index.js",
+"keywords": [
+ "typescript",
+ "cli",
+ "ts-cli",
+ "ts 脚手架",
+ "typescript 脚手架"
+],
+"version": "1.0.2",
+"description": "typescript 项目脚手架",
+"bin": {
+ "ts-cli": "./bin/cli.js"
+},
+"files": [
+ "package.json",
+ "README.md",
+ "lib"
+],
+"scripts": {
+ ...
+},
+"repository": {
+ "type": "git",
+ "url": "https://github.com/tonghuitop/ts-cli"
+},
+"lint-staged": {
+ "*.ts": [
+   "npm run eslint",
+   "npm run prettier"
+ ]
+},
+"author": "tonghui",
+"license": "ISC",
+...
+}</code></pre></li></ol><p><strong>在项目根目录下增加一个发布脚本 publish.sh</strong></p><pre><code>#!/bin/bash
+
+echo '开始构建脚手架'
+
+npm run build
+
+echo '脚手架构建完成，现在发布'
+
+npm publish --access public</code></pre><ol><li>登陆npm<pre><code>npm login</code></pre></li><li>执行发布脚本<pre><code>sh publish.sh</code></pre></li></ol><h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><ol><li>当前项目已发布到<code>npm</code>平台： <a href="https://www.npmjs.com/package/@tonghui/ts-cli" target="_blank" rel="noopener">https://www.npmjs.com/package/@tonghui/ts-cli</a></li><li>当前项目github链接，欢迎start: <a href="https://github.com/tonghuitop/ts-cli" target="_blank" rel="noopener">https://github.com/tonghuitop/ts-cli</a></li></ol><script>document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });</script></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者:</i></span> <span class="reprint-info"><a href="https://tonghuiwu.top" rel="external nofollow noreferrer">tonghui</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接:</i></span> <span class="reprint-info"><a href="https://tonghuiwu.top/posts/917402534.html">https://tonghuiwu.top/posts/917402534.html</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明:</i></span> <span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="https://tonghuiwu.top" target="_blank">tonghui</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
+            let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+            M.toast({html: toastHTML})
+        });
+
+        function navToReprintStatement() {
+            $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+        }</script><div class="tag_share" style="display:block"><div class="post-meta__tag-list" style="display:inline-block"><div class="article-tag"><a href="/tags/JavaScript/"><span class="chip bg-color">JavaScript</span></a> <a href="/tags/TypeScript/"><span class="chip bg-color">TypeScript</span></a> <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/"><span class="chip bg-color">脚手架</span></a> <a href="/tags/cli/"><span class="chip bg-color">cli</span></a></div></div><div class="post_share" style="zoom:80%;width:fit-content;display:inline-block;float:right;margin:-.15rem 0"><link rel="stylesheet" href="/libs/share/css/share.min.css"><div id="article-share"><div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div><script src="/libs/share/js/social-share.min.js"></script></div></div></div></div></div><style>.valine-card{margin:1.5rem auto}.valine-card .card-content{padding:20px 20px 5px 20px}#vcomments textarea{box-sizing:border-box;background:url(/medias/comment_bg.png) 100% 100% no-repeat}#vcomments p{margin:2px 2px 10px;font-size:1.05rem;line-height:1.78rem}#vcomments blockquote p{text-indent:.2rem}#vcomments a{padding:0 2px;color:#4cbf30;font-weight:500;text-decoration:none}#vcomments img{max-width:100%;height:auto;cursor:pointer}#vcomments ol li{list-style-type:decimal}#vcomments ol,ul{display:block;padding-left:2em;word-spacing:.05rem}#vcomments ul li,ol li{display:list-item;line-height:1.8rem;font-size:1rem}#vcomments ul li{list-style-type:disc}#vcomments ul ul li{list-style-type:circle}#vcomments table,td,th{padding:12px 13px;border:1px solid #dfe2e5}#vcomments table,td,th{border:0}table tr:nth-child(2n),thead{background-color:#fafafa}#vcomments table th{background-color:#f2f2f2;min-width:80px}#vcomments table td{min-width:80px}#vcomments h1{font-size:1.85rem;font-weight:700;line-height:2.2rem}#vcomments h2{font-size:1.65rem;font-weight:700;line-height:1.9rem}#vcomments h3{font-size:1.45rem;font-weight:700;line-height:1.7rem}#vcomments h4{font-size:1.25rem;font-weight:700;line-height:1.5rem}#vcomments h5{font-size:1.1rem;font-weight:700;line-height:1.4rem}#vcomments h6{font-size:1rem;line-height:1.3rem}#vcomments p{font-size:1rem;line-height:1.5rem}#vcomments hr{margin:12px 0;border:0;border-top:1px solid #ccc}#vcomments blockquote{margin:15px 0;border-left:5px solid #42b983;padding:1rem .8rem .3rem .8rem;color:#666;background-color:rgba(66,185,131,.1)}#vcomments pre{font-family:monospace,monospace;padding:1.2em;margin:.5em 0;background:#272822;overflow:auto;border-radius:.3em;tab-size:4}#vcomments code{font-family:monospace,monospace;padding:1px 3px;font-size:.92rem;color:#e96900;background-color:#f8f8f8;border-radius:2px}#vcomments pre code{font-family:monospace,monospace;padding:0;color:#e8eaf6;background-color:#272822}#vcomments pre[class*=language-]{padding:1.2em;margin:.5em 0}#vcomments code[class*=language-],pre[class*=language-]{color:#e8eaf6}#vcomments [type=checkbox]:not(:checked),[type=checkbox]:checked{position:inherit;margin-left:-1.3rem;margin-right:.4rem;margin-top:-1px;vertical-align:middle;left:unset;visibility:visible}#vcomments b,strong{font-weight:700}#vcomments dfn{font-style:italic}#vcomments small{font-size:85%}#vcomments cite{font-style:normal}#vcomments mark{background-color:#fcf8e3;padding:.2em}#vcomments table,td,th{padding:12px 13px;border:1px solid #dfe2e5}table tr:nth-child(2n),thead{background-color:#fafafa}#vcomments table th{background-color:#f2f2f2;min-width:80px}#vcomments table td{min-width:80px}#vcomments [type=checkbox]:not(:checked),[type=checkbox]:checked{position:inherit;margin-left:-1.3rem;margin-right:.4rem;margin-top:-1px;vertical-align:middle;left:unset;visibility:visible}</style><div class="card valine-card" data-aos="fade-up"><div id="vcomments" class="card-content" style="display:grid"></div></div><script src="/libs/valine/av-min.js"></script><script src="/libs/valine/Valine.min.js"></script><script>new Valine({el:"#vcomments",appId:"wfbS55KpKv3dYXTNHRGk73sh-gzGzoHsz",appKey:"To2mhClg9ChMFVmNVYx5WyCm",notify:!1,verify:!1,visitor:!0,avatar:"monsterid",pageSize:"10",lang:"zh-cn",placeholder:"ヾﾉ≧∀≦)o来啊，快活啊!"})</script><article id="prenext-posts" class="prev-next articles"><div class="row article-row"><div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up"><div class="article-badge left-badge text-color"><i class="far fa-dot-circle"></i>&nbsp;本篇</div><div class="card"><a href="/posts/917402534.html"><div class="card-image"><img src="/img/blog/cli.jpg" class="responsive-img" alt="作为前端人，谁没有自己的脚手架"> <span class="card-title">作为前端人，谁没有自己的脚手架</span></div></a><div class="card-content article-content"><div class="summary block-with-text">博主喜欢没事的时候，捣鼓一些小项目，博主还喜欢使用typescript，但每次要新搞一个项目时，都要配置一堆文件，例如eslint,tsconfig等文件。甚是麻烦。再说，前端人怎么可以没有自己的脚手架呢。 项目期望 通过命令 ts-cli</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2021-07-23</span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/JavaScript/" class="post-category">JavaScript</a> <a href="/categories/JavaScript/TypeScript/" class="post-category">TypeScript</a> <a href="/categories/JavaScript/TypeScript/cli/" class="post-category">cli</a></span></div></div><div class="card-action article-tags"><a href="/tags/JavaScript/"><span class="chip bg-color">JavaScript</span></a> <a href="/tags/TypeScript/"><span class="chip bg-color">TypeScript</span></a> <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/"><span class="chip bg-color">脚手架</span></a> <a href="/tags/cli/"><span class="chip bg-color">cli</span></a></div></div></div><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge right-badge text-color">下一篇&nbsp;<i class="fas fa-chevron-right"></i></div><div class="card"><a href="/posts/2294066012.html"><div class="card-image"><img src="/img/react/redux.png" class="responsive-img" alt="手写简易版redux"> <span class="card-title">手写简易版redux</span></div></a><div class="card-content article-content"><div class="summary block-with-text">前置知识订阅发布模式 发布订阅模式：一群订阅者（Subscriber）通过消息调度中心来实现基于某个主题去订阅发布者（Publisher）,当有关状态发生变化时，Publisher会基于某个主题去通知该主题下对应的订阅者（Subscribe</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2021-07-11</span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/react/" class="post-category">react</a></span></div></div><div class="card-action article-tags"><a href="/tags/react/"><span class="chip bg-color">react</span></a> <a href="/tags/redux/"><span class="chip bg-color">redux</span></a> <a href="/tags/ts/"><span class="chip bg-color">ts</span></a></div></div></div></div></article></div><script>$("#articleContent").on("copy",function(e){if(void 0!==window.getSelection){var n=window.getSelection();if(!((""+n).length<Number.parseInt("120"))){var t=document.getElementsByTagName("body")[0],o=document.createElement("div");o.style.position="absolute",o.style.left="-99999px",t.appendChild(o),o.appendChild(n.getRangeAt(0).cloneContents()),"PRE"===n.getRangeAt(0).commonAncestorContainer.nodeName&&(o.innerHTML="<pre>"+o.innerHTML+"</pre>");var i=document.location.href;o.innerHTML+='<br />来源: tonghui<br />文章作者: tonghui<br />文章链接: <a href="'+i+'">'+i+"</a><br />本文章著作权归tonghui所有，任何形式的转载都请注明出处。",n.selectAllChildren(o),window.setTimeout(function(){t.removeChild(o)},200)}}})</script><script src="/libs/codeBlock/codeBlockFuction.js"></script><script src="/libs/codeBlock/codeLang.js"></script><script src="/libs/codeBlock/codeCopy.js"></script><script src="/libs/codeBlock/codeShrink.js"></script><style>code[class*=language-],pre[class*=language-]{white-space:pre!important}</style></div><div id="toc-aside" class="expanded col l3 hide-on-med-and-down"><div class="toc-widget"><div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div><div id="toc-content"></div></div></div></div><div id="floating-toc-btn" class="hide-on-med-and-down"><a class="btn-floating btn-large bg-color"><i class="fas fa-list-ul"></i></a></div><script src="/libs/tocbot/tocbot.min.js"></script><script>$(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });</script></main><footer class="page-footer bg-color"><div class="container row center-align"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">年份</span> <a href="https://tonghuiwu.top" target="_blank">tonghui</a> |&nbsp;Powered by&nbsp;<a href="https://github.com/tonghuitop" target="_blank">tonghui</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">19.6k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次</span> <span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><span id="sitetime">载入运行时间...</span><script>function siteTime(){window.setTimeout("siteTime()",1e3);var e=36e5,t=24*e,n=new Date,o="2021",i=n.getFullYear(),r=n.getMonth()+1,a=n.getDate(),m=n.getHours(),l=n.getMinutes(),M=n.getSeconds(),d=Date.UTC(o,"5","1","0","0","0"),g=Date.UTC(i,r,a,m,l,M)-d,s=Math.floor(g/31536e6),T=Math.floor(g/t-365*s),u=Math.floor((g-(365*s+T)*t)/e),c=Math.floor((g-(365*s+T)*t-u*e)/6e4),f=Math.floor((g-(365*s+T)*t-u*e-6e4*c)/1e3);o==i?(document.getElementById("year").innerHTML=i,document.getElementById("sitetime").innerHTML="本站已安全运行 "+T+" 天 "+u+" 小时 "+c+" 分钟 "+f+" 秒"):(document.getElementById("year").innerHTML=o+" - "+i,document.getElementById("sitetime").innerHTML="本站已安全运行 "+s+" 年 "+T+" 天 "+u+" 小时 "+c+" 分钟 "+f+" 秒")}setInterval(siteTime,1e3)</script><br><span id="icp"><img src="/medias/icp.png" style="vertical-align:text-bottom"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备2022002152号-1</a></span></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/tonghuitop" class="tooltipped" target="_blank" data-tooltip="github: https://github.com/tonghuitop" data-position="top" data-delay="50"><i class="fab fa-github-alt"></i></a><a href="https://gitee.com/sharkship" class="tooltipped" target="_blank" data-tooltip="码云" data-position="top" data-delay="50"><i class="fab fa-gofore"></i></a><a href="mailto:tonghui.wu@outlook.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-at"></i></a><a href="https://wang_lianjie.gitee.io/mobai_images.gitee.io/img/about.jpg" class="tooltipped" target="_blank" data-tooltip="wechat: https://wang_lianjie.gitee.io/mobai_images.gitee.io/img/about.jpg" data-position="top" data-delay="50"><i class="fab fa-weixin"></i></a><a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=875815842" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 875815842" data-position="top" data-delay="50"><i class="fab fa-qq"></i></a><a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50"><i class="fas fa-rss"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script src="/js/search.js"></script><script>$(function(){searchFunc("/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="/libs/materialize/materialize.min.js"></script><script src="/libs/masonry/masonry.pkgd.min.js"></script><script src="/libs/aos/aos.js"></script><script src="/libs/scrollprogress/scrollProgress.min.js"></script><script src="/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="/js/matery.js"></script><script>var st,OriginTitile=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="看不见我🙈~看不见我🙈~",clearTimeout(st)):(document.title="(๑•̀ㅂ•́) ✧被发现了～",st=setTimeout(function(){document.title=OriginTitile},3e3))})</script><canvas class="fireworks" style="position:fixed;left:0;top:0;z-index:1;pointer-events:none"></canvas><script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script src="/js/fireworks.js"></script><script>window.onload=function(){document.onkeydown=function(){var e=window.event||arguments[0];return 123!=e.keyCode&&(!e.ctrlKey||!e.shiftKey||73!=e.keyCode)&&(!e.shiftKey||121!=e.keyCode)&&(!e.ctrlKey||85!=e.keyCode)&&void 0},document.oncontextmenu=function(){return!1}}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-QRKT2NH7DH"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-QRKT2NH7DH")</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?877dd42f60a5d414d74af5272797a71a";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script async src="/libs/others/busuanzi.pure.mini.js"></script><script color="0,0,255" pointcolor="0,0,0" opacity="0.7" zindex="-1" count="120" src="/libs/background/canvas-nest.js"></script><script src="/libs/instantpage/instantpage.js" type="module"></script></body></html>
